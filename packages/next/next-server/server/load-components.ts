@@ -29,6 +29,7 @@ export type LoadComponentsReturnType = {
   reactLoadableManifest: ReactLoadableManifest
   Document: DocumentType
   App: AppType
+  appGetStaticProps?: GetStaticProps
   getStaticProps?: GetStaticProps
   getStaticPaths?: GetStaticPaths
   getServerSideProps?: GetServerSideProps
@@ -71,6 +72,7 @@ export async function loadComponents(
   ])
 
   const { getServerSideProps, getStaticProps, getStaticPaths } = ComponentMod
+  const { getStaticProps: appGetStaticProps } = AppMod
 
   return {
     App,
@@ -79,6 +81,7 @@ export async function loadComponents(
     buildManifest,
     reactLoadableManifest,
     pageConfig: ComponentMod.config || {},
+    appGetStaticProps,
     getServerSideProps,
     getStaticProps,
     getStaticPaths,

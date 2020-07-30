@@ -298,7 +298,7 @@ export async function loadGetInitialProps<
   C extends BaseContext,
   IP = {},
   P = {}
->(App: NextComponentType<C, IP, P>, ctx: C): Promise<IP> {
+>(App: NextComponentType<C, IP, P>, ctx: C, getStaticProps?: any): Promise<IP> {
   if (process.env.NODE_ENV !== 'production') {
     if (App.prototype?.getInitialProps) {
       const message = `"${getDisplayName(
@@ -320,7 +320,9 @@ export async function loadGetInitialProps<
     return {} as IP
   }
 
-  const props = await App.getInitialProps(ctx)
+  const staticProps = getStaticProps ? await getStaticProps(ctx) : {}
+  const initialProps = await App.getInitialProps(ctx)
+  const props = { ...staticProps, ...initialProps }
 
   if (res && isResSent(res)) {
     return props

@@ -276,6 +276,7 @@ export async function renderToHTML(
     fontManifest,
     reactLoadableManifest,
     ErrorDebug,
+    appGetStaticProps,
     getStaticProps,
     getStaticPaths,
     getServerSideProps,
@@ -498,6 +499,7 @@ export async function renderToHTML(
       Component,
       router,
       ctx,
+      appGetStaticProps,
     })
 
     if (isSSG) {
